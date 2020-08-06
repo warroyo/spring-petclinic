@@ -1,0 +1,25 @@
+service:
+  name: petclinic-svc
+  port: 8080
+
+productionDeployment:
+  replicaCount: 2
+  weight: 100
+  image:
+    repository: harbor.lab.local/library/petclinic
+    buildversion: 1.0.0
+    pullPolicy: IfNotPresent
+  apiversion: v1
+
+
+canaryDeployment:
+  replicaCount: 0
+  weight: 0
+  image:
+    repository: harbor.lab.local/library/petclinic
+    buildversion: 1.0.0
+    pullPolicy: IfNotPresent
+  apiversion: v1
+
+
+

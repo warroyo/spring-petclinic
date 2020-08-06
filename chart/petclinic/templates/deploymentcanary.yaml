@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "petclinic.fullname" . }}canary
+  labels:
+    app: {{ template "petclinic.name" . }}
+    canary: "true"
+    apiversion: {{.Values.canaryDeployment.apiversion}}
+    version: {{ .Values.canaryDeployment.image.buildversion }}
+    chart: {{ template "petclinic.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.canaryDeployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "petclinic.name" . }}
+      canary: "true"
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "petclinic.name" . }}
+        canary: "true"
+        release: {{ .Release.Name }}
+        apiversion: {{.Values.canaryDeployment.apiversion}}
+        version: {{ .Values.canaryDeployment.image.buildversion }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}canary
+          image: "{{ .Values.canaryDeployment.image.repository }}:{{ .Values.canaryDeployment.image.buildversion }}"
+          imagePullPolicy: {{ .Values.canaryDeployment.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
