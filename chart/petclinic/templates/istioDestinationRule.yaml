@@ -17,3 +17,9 @@ spec:
   - name: canary
     labels:
       canary: "true"
+  - name: {{.Values.canaryDeployment.apiversion}}
+    labels:
+      apiversion: {{.Values.canaryDeployment.apiversion}}
+  - name: {{.Values.productionDeployment.apiversion}}
+    labels:
+      apiversion: {{.Values.productionDeployment.apiversion}}

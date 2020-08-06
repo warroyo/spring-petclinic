@@ -12,6 +12,26 @@ spec:
   gateways:
   - petclinic
   http:
+  - match:
+    - headers:
+        api-version:
+          exact: {{.Values.productionDeployment.apiversion}}
+    route:
+    - destination:
+        host: {{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local
+        subset: {{.Values.productionDeployment.apiversion}}
+        port:
+          number: {{ .Values.service.port }}    
+  - match:
+    - headers:
+        api-version:
+          exact: {{.Values.canaryDeployment.apiversion}}
+    route:
+    - destination:
+        host: {{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local
+        subset: {{.Values.canaryDeployment.apiversion}}
+        port:
+          number: {{ .Values.service.port }}    
   - route:
     - destination:
         host: {{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local
