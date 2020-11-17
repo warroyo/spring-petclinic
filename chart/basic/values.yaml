@@ -1,0 +1,15 @@
+service:
+  name: petclinic-svc
+  port: 8080
+  type: LoadBalancer
+
+
+replicaCount: 2
+image:
+  repository: dev.registry.pivotal.io/library/petclinic
+  secret: devregistry
+  buildversion: latest
+  pullPolicy: IfNotPresent
+
+
+

@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: petclinic-legacy-service-entry
+  labels:
+    chart: {{ template "petclinic.chart" . }}
+    release: {{ .Release.Name }}
+    version: {{ .Values.canaryDeployment.image.buildversion }}
+spec:
+  hosts:
+  - {{ .Values.legacy.hostname }}
+  ports:
+  - number: {{ .Values.legacy.port }}
+    name: {{ .Values.legacy.portProtocol }}
+    protocol: {{ .Values.legacy.portProtocol }}
+  location: MESH_EXTERNAL
+  resolution: DNS
