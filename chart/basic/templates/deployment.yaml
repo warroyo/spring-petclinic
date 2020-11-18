@@ -4,7 +4,6 @@ metadata:
   name: {{ template "petclinic.fullname" . }}
   labels:
     app: {{ template "petclinic.name" . }}
-    version: {{ .Values.image.buildversion }}
     chart: {{ template "petclinic.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -18,7 +17,6 @@ spec:
     metadata:
       labels:
         app: {{ template "petclinic.name" . }}
-        version: {{ .Values.image.buildversion }}
         release: {{ .Release.Name }}
     spec:
       imagePullSecrets:
