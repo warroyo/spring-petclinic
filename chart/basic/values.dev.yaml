@@ -1,0 +1,9 @@
+environment:
+  - name: SPRING_PROFILES_ACTIVE
+    value: mysql
+  - name: MYSQL_USER
+    value: petclinic
+  - name: MYSQL_PASS
+    value: petclinic
+  - name: MYSQL_URL
+    value: jdbc:mysql:petclinic-mysql.default.svc.cluster.local/petclinic
