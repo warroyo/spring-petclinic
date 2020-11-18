@@ -5,7 +5,7 @@ service:
 
 
 replicaCount: 2
-environment: 
+env: 
 image:
   image: dev.registry.pivotal.io/library/petclinic:latest
   secret: devregistry
