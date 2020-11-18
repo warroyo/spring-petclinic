@@ -5,10 +5,10 @@ service:
 
 
 replicaCount: 2
+environment: 
 image:
-  repository: dev.registry.pivotal.io/library/petclinic
+  image: dev.registry.pivotal.io/library/petclinic:latest
   secret: devregistry
-  buildversion: latest
   pullPolicy: IfNotPresent
 
 

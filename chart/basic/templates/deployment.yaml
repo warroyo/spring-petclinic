@@ -25,7 +25,7 @@ spec:
       - name: {{ .Values.secret}}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.buildversion }}"
+          image: "{{ .Values.image.image }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env: {{ .Values.environment }}
           ports:
