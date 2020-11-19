@@ -6,10 +6,13 @@ env:
  #@overlay/append
   - name: SPRING_PROFILES_ACTIVE
     value: mysql,wavefront
+ #@overlay/append
   - name: MYSQL_USER
     value: petclinic
+ #@overlay/append
   - name: MYSQL_PASS
     value: petclinic
+ #@overlay/append
   - name: MYSQL_URL
     value: jdbc:mysql://petclinic-mysql.default.svc.cluster.local:3306/petclinic
 image:
