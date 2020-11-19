@@ -17,6 +17,7 @@ env:
     value: jdbc:mysql://petclinic-mysql.default.svc.cluster.local:3306/petclinic
 image:
   image: dev.registry.pivotal.io/library/petclinic:latest
-  imagePullSecrets: 
+  imagePullSecrets:
+  #@overlay/append
   - name: devregistry
   pullPolicy: IfNotPresent
