@@ -20,7 +20,9 @@ spec:
         release: {{ .Release.Name }}
     spec:
       imagePullSecrets:
-      - name: {{ .Values.image.secret}}
+      {{- range .Values.image.imagePullSecrets }}
+      - name: {{ .name }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.image }}"
@@ -30,6 +32,9 @@ spec:
           - name: {{ .name }}
             value: {{ .value }}
           {{- end }}
+          resources:
+            limits:
+              memory: "2Gi"
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -42,3 +47,15 @@ spec:
             httpGet:
               path: /
               port: http
+
+ {{ if eq .Values.local true }}
+---
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Sources
+sources:
+- image: petclinic
+  path: ./
+  pack:
+    build:
+      builder: cloudfoundry/cnb:bionic
+{{end}}

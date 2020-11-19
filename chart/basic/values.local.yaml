@@ -3,13 +3,13 @@ service:
   port: 8080
   type: LoadBalancer
 
-local: false
+local: true
 replicaCount: 1
-env: 
+env:
 image:
   image: petclinic
   imagePullSecrets: {}
-  pullPolicy: IfNotPresent
+  pullPolicy: Never
 
 
 
