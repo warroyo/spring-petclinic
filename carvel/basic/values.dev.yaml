@@ -16,7 +16,7 @@ env:
   - name: MYSQL_URL
     value: jdbc:mysql://petclinic-mysql.default.svc.cluster.local:3306/petclinic
 image:
-  image: dev.registry.pivotal.io/library/petclinic:latest
+  image: dev.registry.pivotal.io/warroyo/petclinic:latest
   imagePullSecrets:
   #@overlay/append
   - name: devregistry
