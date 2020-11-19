@@ -1,7 +1,7 @@
 replicaCount: 2
 env:
   - name: SPRING_PROFILES_ACTIVE
-    value: mysql
+    value: mysql,wavefront
   - name: MYSQL_USER
     value: petclinic
   - name: MYSQL_PASS
