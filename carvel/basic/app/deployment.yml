@@ -1,0 +1,60 @@
+#@ load("@ytt:data", "data")
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #@ data.values.name
+  labels:
+    app: #@ data.values.name
+spec:
+  replicas: #@ data.values.replicaCount
+  selector:
+    matchLabels:
+      app:  #@ data.values.name
+  template:
+    metadata:
+      labels:
+        app: #@ data.values.name
+    spec:
+      imagePullSecrets:
+      #@ for val in data.values.image.imagePullSecrets:
+      - name: #@ val.name
+      #@ end
+      containers:
+        - name: #@ data.values.name
+          image: #@ data.values.image.image
+          imagePullPolicy: #@ data.values.image.pullPolicy 
+          env:
+          #@ for val in data.values.env:
+            - name: #@ val.name
+              value: #@ val.value 
+          #@ end
+          resources:
+            limits:
+              memory: "2Gi"
+          ports:
+            - name: http
+              containerPort: #@ data.values.service.port
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+          readinessProbe:
+            initialDelaySeconds: 30
+            httpGet:
+              path: /
+              port: http
+
+  #@ if data.values.local:
+---
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Sources
+sources:
+- image: petclinic
+  path: ./
+  pack:
+    build:
+      builder: cloudfoundry/cnb:bionic
+#@ end

@@ -1,0 +1,19 @@
+#@data/values
+
+---
+name: petclinic
+service:
+  name: petclinic-svc
+  port: 8080
+  type: LoadBalancer
+
+local: false
+replicaCount: 1
+env: []
+image:
+  image: petclinic
+  imagePullSecrets: []
+  pullPolicy: IfNotPresent
+
+
+

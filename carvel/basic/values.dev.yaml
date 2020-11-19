@@ -1,0 +1,18 @@
+#@data/values
+
+---
+replicaCount: 2
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: mysql,wavefront
+  - name: MYSQL_USER
+    value: petclinic
+  - name: MYSQL_PASS
+    value: petclinic
+  - name: MYSQL_URL
+    value: jdbc:mysql://petclinic-mysql.default.svc.cluster.local:3306/petclinic
+image:
+  image: dev.registry.pivotal.io/library/petclinic:latest
+  imagePullSecrets: 
+  - name: devregistry
+  pullPolicy: IfNotPresent

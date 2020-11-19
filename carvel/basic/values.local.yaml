@@ -1,0 +1,18 @@
+#@data/values
+
+---
+service:
+  name: petclinic-svc
+  port: 8080
+  type: ClusterIP
+
+local: true
+replicaCount: 1
+env: []
+image:
+  image: petclinic
+  imagePullSecrets: []
+  pullPolicy: Never
+
+
+
