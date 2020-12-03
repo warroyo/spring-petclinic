@@ -21,5 +21,11 @@ canaryDeployment:
     pullPolicy: IfNotPresent
   apiversion: v1
 
+legacy:
+  hostname: petclinic.lab.local
+  portProtocol: http
+  port: 80
+
+
 
 
